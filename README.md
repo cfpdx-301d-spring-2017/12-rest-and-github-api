@@ -1,6 +1,4 @@
-![CF](https://i.imgur.com/7v5ASc8.png)  Lab 12: REST and APIs
-=======
-[Code of Conduct](https://github.com/codefellows/code-of-conduct)
+Lab 12: REST and APIs
 
 Now that we understand how applications can handle different URLs, we can write code that communicates with other applications. Let each partner try out their own user info to get the chance to see their repos with their token. For today, please create a `githubToken.js` file in the root of your app. Open this file, create a variable, and store your access token. Add the new file to your `.gitignore` in the terminal by running `echo githubToken.js >> .gitignore`
 
