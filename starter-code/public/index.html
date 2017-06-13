@@ -27,8 +27,10 @@
     </script>
 
     <!-- DONE: We  have a new Handlebars template! Help fill in a few expressions: -->
-    <script id="about-template" type="text/x-handlebars-template">
+    <script id="user-template" type="text/x-handlebars-template">
       <img src="{{avatar_url}}" alt="{{name}} github avatar">
+      <h2>{{name}}</h2>
+      <p>{{location}}</p>
     </script>  
 
     <script id="repo-template" type="text/x-handlebars-template">
@@ -88,7 +90,8 @@
         <section>
           <h1>Some of my interests:</h1>
           <div></div>
-          <ul>
+          <h3>Repositories</h3>
+          <ul> 
             <li>Coding</li>
             <li>Sharing what I've learned</li>
             <li>Hanging with my family</li>

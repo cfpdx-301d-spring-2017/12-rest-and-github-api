@@ -14,18 +14,19 @@ var app = app || {};
 
   // DONE: Remember that new Handlebars template? Let's compile it!
   // Save the result in this `render` variable.
-  let userRender = Handlebars.compile($('#user-template').text()); 
   let repoRender = Handlebars.compile($('#repo-template').text());
+  let userRender = Handlebars.compile($('#user-template').text());
 
   aboutView.userIndex = function() {
     ui();
     // The jQuery `append` method lets us append an entire array of HTML elements at once:
     $('#about div').append(
-      app.user.userRender // Want to filter by a different property other than name?
-    );
+      app.user.all.map(userRender));
   };
+
   aboutView.repoIndex = function() {
     ui();
+    // console.log('appending for repo: ',app.repos.with('name').map(repoRender));
     // The jQuery `append` method lets us append an entire array of HTML elements at once:
     $('#about ul').append(
       app.repos.with('name').map(repoRender) // Want to filter by a different property other than name?
