@@ -2,6 +2,22 @@
 var app = app || {};
 
 (function(module) {
+  const user = {};
+
+  user.all = [];
+
+  user.requestUser = function(callback) {
+    $.ajax({
+      url: `https://api.github.com/user`,
+      type: 'GET',
+      headers: {'Authorization': `token ${githubToken}`} // eslint-disable-line
+    })
+    .then(data => user.all = data, err => console.error(err))
+    .then(callback);
+  }
+
+  module.user = user;
+
   const repos = {};
 
   repos.all = [];
@@ -17,10 +33,6 @@ var app = app || {};
       headers: {'Authorization': `token ${githubToken}`} // eslint-disable-line
     })
     .then(data => repos.all = data, err => console.error(err))
-    // .then(function(data,err){
-    //   if(data) {repos.all.push(data);}
-    //   else{console.error(err)}
-    // })
     .then(callback);
     
   };
@@ -28,7 +40,5 @@ var app = app || {};
   // REVIEW: Model method that filters the full collection for repos with a particular attribute.
   // You could use this to filter all repos that have a non-zero `forks_count`, `stargazers_count`, or `watchers_count`.
   repos.with = attr => repos.all.filter(repo => repo[attr]);
-  console.log('after repos.with', repos.all);
-
   module.repos = repos;
 })(app);
