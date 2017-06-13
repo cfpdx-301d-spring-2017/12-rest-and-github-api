@@ -26,16 +26,22 @@
       </article>
     </script>
 
-    <!-- TODO: We  have a new Handlebars template! Help fill in a few expressions: -->
+    <!-- DONE: We  have a new Handlebars template! Help fill in a few expressions: -->
+    <script id="user-template" type="text/x-handlebars-template">
+      <img src="{{avatar_url}}" alt="{{name}} github avatar">
+      <h2>{{name}}</h2>
+      <p>{{location}}</p>
+    </script>  
+
     <script id="repo-template" type="text/x-handlebars-template">
       <li>
         <a href="{{html_url}}" target="_blank">
-          <h3>{{}}</h3>
+          <h3>{{name}}</h3>
         </a>
-        <p>Description: {{}}</p>
-        <p>Language: {{}}</p>
-        <p>Created: {{}}</p>
-        <p>Last updated: {{}}</p>
+        <p>Description: {{description}}</p>
+        <p>Language: {{language}}</p>
+        <p>Created: {{created_at}}</p>
+        <p>Last updated: {{updated_at}}</p>
         {{#if watchers_count}}
           <p>{{watchers_count}} watching this repo</p>
         {{/if}}
@@ -83,7 +89,9 @@
         </header>
         <section>
           <h1>Some of my interests:</h1>
-          <ul>
+          <div></div>
+          <h3>Repositories</h3>
+          <ul> 
             <li>Coding</li>
             <li>Sharing what I've learned</li>
             <li>Hanging with my family</li>
@@ -111,8 +119,8 @@
 
     <!-- DONE: Be sure to include any new script files: -->
     <script src="/scripts/controllers/aboutController.js"></script>
-    <script src="/scripts/models/repo.js"></script>
-    <script src="/scripts/views/repoView.js"></script>
+    <script src="/scripts/models/about.js"></script>
+    <script src="/scripts/views/aboutView.js"></script>
     <script src="/scripts/controllers/routes.js"></script>
   </body>
 </html>

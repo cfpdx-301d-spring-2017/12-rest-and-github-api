@@ -1,12 +1,28 @@
 'use strict';
 var app = app || {};
 
-(function(module) {
+(function (module) {
+  const user = {};
+
+  user.all = [];
+
+  user.requestUser = function (callback) {
+    $.ajax({
+      url: `https://api.github.com/user`,
+      type: 'GET',
+      headers: { 'Authorization': `token ${githubToken}` } // eslint-disable-line
+    })
+      .then(data => user.all.push(data), err => console.error(err))
+      .then(callback);
+  }
+  // user.with = attr => user.all.filter(user => user[attr]);
+  module.user = user;
+
   const repos = {};
 
   repos.all = [];
 
-  repos.requestRepos = function(callback) {
+  repos.requestRepos = function (callback) {
     // DONE:  How would you like to fetch your repos? Don't forget to call the callback.
     //       Remember that the callback function we'll want to call relies on repos.all
     //       being an array with a bunch of repo objects in it, so you'll need to
@@ -14,21 +30,15 @@ var app = app || {};
     $.ajax({
       url: `https://api.github.com/user/repos`,
       type: 'GET',
-      headers: {'Authorization': `token ${githubToken}`} // eslint-disable-line
+      headers: { 'Authorization': `token ${githubToken}` } // eslint-disable-line
     })
-    .then(data => repos.all = data, err => console.error(err))
-    // .then(function(data,err){
-    //   if(data) {repos.all.push(data);}
-    //   else{console.error(err)}
-    // })
-    .then(callback);
-    
+      .then(data => repos.all = data, err => console.error(err))
+      .then(callback);
+
   };
 
   // REVIEW: Model method that filters the full collection for repos with a particular attribute.
   // You could use this to filter all repos that have a non-zero `forks_count`, `stargazers_count`, or `watchers_count`.
   repos.with = attr => repos.all.filter(repo => repo[attr]);
-  console.log('after repos.with', repos.all);
-
   module.repos = repos;
 })(app);
