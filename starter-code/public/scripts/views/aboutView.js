@@ -2,7 +2,7 @@
 var app = app || {};
 
 (function(module) {
-  const repoView = {};
+  const aboutView = {};
 
   // REVIEW: Private methods declared here live only within the scope of the wrapping IIFE.
   const ui = function() {
@@ -14,16 +14,24 @@ var app = app || {};
 
   // DONE: Remember that new Handlebars template? Let's compile it!
   // Save the result in this `render` variable.
-  let render = Handlebars.compile($('#repo-template').text());
+  let userRender = Handlebars.compile($('#user-template').text()); 
+  let repoRender = Handlebars.compile($('#repo-template').text());
 
-  repoView.index = function() {
-    console.log(app.repos.all);
+  aboutView.userIndex = function() {
+    ui();
+    // The jQuery `append` method lets us append an entire array of HTML elements at once:
+    $('#about div').append(
+      app.user.userRender // Want to filter by a different property other than name?
+    );
+  };
+  aboutView.repoIndex = function() {
     ui();
     // The jQuery `append` method lets us append an entire array of HTML elements at once:
     $('#about ul').append(
-      app.repos.with('name').map(render) // Want to filter by a different property other than name?
+      app.repos.with('name').map(repoRender) // Want to filter by a different property other than name?
     );
   };
 
-  module.repoView = repoView;
+
+  module.aboutView = aboutView;
 })(app);
